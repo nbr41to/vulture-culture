@@ -12,8 +12,9 @@ export const useRoom = (): Room => {
   const [room, setRoom] = useState<Room>(null);
 
   useEffect(() => {
-    console.log('useUser', roomId);
     if (roomId === '[roomId]') return;
+    // console.log('useRoom', roomId);
+
     const unsubscribe = onSnapshot(doc(db, 'rooms', roomId), (doc) => {
       const data = doc.data() as Room;
       setRoom(data);

@@ -13,8 +13,10 @@ export const useUser = (): User => {
   const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
-    console.log('useUser', roomId, userId);
     if (user) return;
+    if (roomId === '[roomId]' || !userId) return;
+    // console.log('useUser', roomId, userId);
+
     getUser({ userId, roomId }).then((res) => {
       setUser(res);
     });

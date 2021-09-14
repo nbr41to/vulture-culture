@@ -14,7 +14,13 @@ import { Room, User } from 'types';
 import { db } from './config';
 
 const roomRef = collection(db, 'rooms');
-const roomDoc = (roomId?: string) => doc(db, 'rooms', roomId);
+/* roomIdを指定しない場合はReferenceを作成して返す */
+const roomDoc = (roomId?: string) => {
+  if (roomId) {
+    return doc(roomRef, roomId);
+  }
+  return doc(roomRef);
+};
 
 /* 新しい部屋の作成 */
 export const createRoom = async (input: {
@@ -72,7 +78,7 @@ export const joinRoom = async (input: {
 };
 
 /* ReadyCheck */
-export const onReady = async (input: {
+export const readyCheck = async (input: {
   playerId: string;
   roomId: string;
 }): Promise<void> => {
