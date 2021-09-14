@@ -1,13 +1,9 @@
-# Next.js Template
+# Vulture Culture
 
-```
-yarn create next-app [PJ_NAME] -e "https://github.com/nbr41to/template-next"
-```
+ハゲタカのえじき
 
-## Installation
+## 遊び方
 
-- typescirpt
-- styled-components
-- recoil
-- eslint
-- prettier
+## Rules
+
+## Issues
