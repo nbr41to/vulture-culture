@@ -3,11 +3,11 @@ export type User = {
   name: string;
 };
 
-export type Phase = 'not started' | 'waiting' | 'playing';
+export type Phase = 'not started' | 'select' | 'wait';
 export type Player = {
   id?: string;
   name: string;
-  hands: [];
+  hands: number[];
   isReady: boolean;
   score: number;
   next: string;
@@ -21,7 +21,8 @@ export type Room = {
   players: {
     [playerId: string]: Player;
   };
-  deck: []; // 山札
+  deck: number[]; // 山札
+  field: { playerId: string; number: number }[]; // 場
   /* ゲームの状態 */
   status: { phase: Phase; playerId: string };
 };

@@ -6,6 +6,7 @@ import { useUser } from 'src/recoil/hooks/useUser';
 import styled from 'styled-components';
 import { translatePlayersArray } from '../../libs/translatePlayersArray';
 import { writeRoomState } from 'src/firebase/firestore';
+import { GameBoard } from './GameBoard';
 
 type PlayingRoomProps = {
   className?: string;
@@ -16,8 +17,8 @@ export const PlayingRoom: VFC<PlayingRoomProps> = ({ className }) => {
   const room = useRoom();
 
   const gameStartHandler = async () => {
-    // const changedRoom = setGame(room);
-    // await writeRoomState(changedRoom);
+    const changedRoom = setGame(room);
+    await writeRoomState(changedRoom);
   };
   const readyCheckHandler = async () => {
     await readyCheck({ roomId: room.id, playerId: user.id });
@@ -30,7 +31,8 @@ export const PlayingRoom: VFC<PlayingRoomProps> = ({ className }) => {
 
     return (
       <StyledPlayingRoom className={`${className}`}>
-        <h2>部屋の人</h2>
+        <h3>招待コード: {room.inviteCode}</h3>
+        <h3>部屋の人</h3>
         {players.map((player) => (
           <div key={player.id}>{player.name}</div>
         ))}
@@ -40,6 +42,10 @@ export const PlayingRoom: VFC<PlayingRoomProps> = ({ className }) => {
           </button>
         ) : (
           <button onClick={readyCheckHandler}>READY</button>
+        )}
+        <div>-----------------------</div>
+        {room.status.phase !== 'not started' && (
+          <GameBoard room={room} user={user} />
         )}
       </StyledPlayingRoom>
     );

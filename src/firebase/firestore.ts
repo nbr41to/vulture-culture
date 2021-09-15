@@ -45,6 +45,7 @@ export const createRoom = async (input: {
       },
     },
     deck: [],
+    field: [],
     status: { phase: 'not started', playerId: '' },
   };
 
