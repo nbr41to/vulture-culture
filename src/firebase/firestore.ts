@@ -38,7 +38,7 @@ export const createRoom = async (input: {
     players: {
       [playerId]: {
         name,
-        isReady: false,
+        isReady: true,
         hands: [],
         score: 0,
         next: '',
